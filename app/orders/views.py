@@ -1,8 +1,6 @@
 import json
 import datetime
 
-import http3
-import requests_async as requests
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse, JsonResponse
 from django.core.mail import EmailMessage
