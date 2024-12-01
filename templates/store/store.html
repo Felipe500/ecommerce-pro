@@ -6,9 +6,9 @@
 <section class="section-pagetop bg">
 <div class="container">
 	{% if 'search' in request.path %}
-		<h2 class="title-page">Search Result</h2>
+		<h2 class="title-page">Resultados da pesquisa</h2>
 	{% else %}
-		<h2 class="title-page">Our Store</h2>
+		<h2 class="title-page">Nossa Loja</h2>
 	{% endif %}
 
 </div> <!-- container //  -->
@@ -27,14 +27,14 @@
 		<header class="card-header">
 			<a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
 				<i class="icon-control fa fa-chevron-down"></i>
-				<h6 class="title">Categories</h6>
+				<h6 class="title">Categorias</h6>
 			</a>
 		</header>
 		<div class="filter-content collapse show" id="collapse_1" style="">
 			<div class="card-body">
 
 				<ul class="list-menu">
-					<li><a href="{% url 'store' %}">All Products  </a></li>
+					<li><a href="{% url 'store' %}">Todos Produtos  </a></li>
 					{% for category in links %}
 				<li><a href="{{ category.get_url }}">{{ category.category_name }}  </a></li>
 					{% endfor %}
@@ -51,7 +51,7 @@
 
 <header class="border-bottom mb-4 pb-3">
 		<div class="form-inline">
-			<span class="mr-md-auto"><b>{{ product_count }}</b> items found </span>
+			<span class="mr-md-auto"><b>{{ product_count }}</b> items encontrados </span>
 
 		</div>
 </header><!-- sect-heading -->
@@ -70,17 +70,17 @@
 				<div class="fix-height">
 					<a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
 					<div class="price-wrap mt-2">
-						<span class="price">$ {{ product.price }}</span>
+						<span class="price">R$ {{ product.price }}</span>
 					</div> <!-- price-wrap.// -->
 				</div>
-				<a href="{{ product.get_url }}" class="btn btn-block btn-primary">View Details </a>
+				<a href="{{ product.get_url }}" class="btn btn-block btn-primary">Ver Detalhes</a>
 			</figcaption>
 		</figure>
 	</div> <!-- col.// -->
 	{% endfor %}
 	{% else %}
 	<div>
-		<h2>No result found. Please try again.</h2>
+		<h2>Nenhum resultado encontrado. Por favor, tente novamente.</h2>
 	</div>
 	{% endif %}
 </div> <!-- row end.// -->
@@ -90,9 +90,9 @@
 	{% if products.has_other_pages %}
 	  <ul class="pagination">
 			{% if products.has_previous %}
-	    <li class="page-item"><a class="page-link" href="?page={{products.previous_page_number}}">Previous</a></li>
+	    <li class="page-item"><a class="page-link" href="?page={{products.previous_page_number}}">Voltar</a></li>
 			{% else %}
-			<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+			<li class="page-item disabled"><a class="page-link" href="#">Voltar</a></li>
 			{% endif %}
 
 			{% for i in products.paginator.page_range %}
@@ -104,9 +104,9 @@
 	    {% endfor %}
 
 			{% if products.has_next %}
-	    	<li class="page-item"><a class="page-link" href="?page={{products.next_page_number}}">Next</a></li>
+	    	<li class="page-item"><a class="page-link" href="?page={{products.next_page_number}}">Proximo</a></li>
 			{% else %}
-				<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+				<li class="page-item disabled"><a class="page-link" href="#">Proximo</a></li>
 			{% endif %}
 	  </ul>
 	{% endif %}

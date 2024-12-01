@@ -4,5 +4,5 @@ from .views import PaymentMercadoPagoAPIView, WebHookMercadoPagoAPIView, IPNMerc
 urlpatterns = [
     path("process_payment/mercadopago", PaymentMercadoPagoAPIView.as_view(), name="process_payment"),
     path("webhook/mercadopago", WebHookMercadoPagoAPIView.as_view(), name="webhook"),
-    path("ipn/mercadopago", WebHookMercadoPagoAPIView.as_view(), name="process_payment"),
+    path("ipn/mercadopago", IPNMercadoPagoAPIView.as_view(), name="ipn"),
 ]

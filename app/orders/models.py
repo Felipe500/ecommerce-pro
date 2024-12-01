@@ -7,8 +7,12 @@ class Payment(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     payment_id = models.CharField(max_length=100)
     payment_method = models.CharField(max_length=100)
-    amount_paid = models.CharField(max_length=100) # this is the total amount paid
+    payment_method_id = models.CharField(max_length=100)
+    payment_type_id = models.CharField(max_length=100)
+    amount_paid = models.CharField(max_length=100)
+    transaction_data = models.JSONField(default=dict)
     status = models.CharField(max_length=100)
+    date_of_expiration = models.DateTimeField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -21,9 +25,10 @@ class Order(models.Model):
         ('Accepted', 'Aceito'),
         ('await_payment', 'Aguardando pagamento'),
         ('payment_confirmed', 'Pagamento Confirmado'),
+        ('payment_error', 'Erro no Pagamento'),
         ('waiting_for_shipping', 'Aguardando Envio'),
         ('sent', 'Enviado'),
-        ('Completed', 'Completd'),
+        ('Completed', 'Completo'),
         ('Cancelled', 'Cancelado'),
     )
 

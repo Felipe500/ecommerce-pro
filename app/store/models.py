@@ -1,3 +1,4 @@
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from app.category.models import Category
 from django.urls import reverse
@@ -9,13 +10,22 @@ class Product(models.Model):
     product_name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
     description = models.TextField(max_length=500, blank=True)
-    price = models.IntegerField()
+    price = models.FloatField()
     images = models.ImageField(upload_to='photos/products')
     stock = models.IntegerField()
     is_available = models.BooleanField(default=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    variation_list = ArrayField(
+        models.CharField(max_length=200),
+        blank=True,
+        null=True,
+        verbose_name="ids_variações",
+        help_text="Separado por virgula ,",
+    )
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
+    complemento = models.BooleanField(default=False)
+    cobertura = models.BooleanField(default=False)
 
     def get_url(self):
         return reverse('product_detail', args=[self.category.slug, self.slug])
@@ -47,13 +57,13 @@ class VariationManager(models.Manager):
 
 
 variation_category_choice = (
-    ('color', 'color'),
-    ('size', 'size'),
+    ('complemento', 'complemento'),
+    ('cobertura', 'cobertura'),
 )
 
 
 class Variation(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="produto")
     variation_category = models.CharField(max_length=100, choices=variation_category_choice)
     variation_value = models.CharField(max_length=100)
     is_active = models.BooleanField(default=True)
